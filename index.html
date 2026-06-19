@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>爱游戏 · 日常查询与场景对照</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(145deg, #fce9d8 0%, #f9dcc6 40%, #f5ceb0 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 1.2rem;
+      color: #3d2d21;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 960px;
+      width: 100%;
+      background: rgba(255, 249, 240, 0.6);
+      backdrop-filter: blur(2px);
+      border-radius: 36px 36px 28px 28px;
+      padding: 1.8rem 1.8rem 2.8rem;
+      box-shadow: 0 12px 28px rgba(140, 80, 40, 0.15);
+      transition: all 0.2s;
+    }
+
+    /* 顶部导航 —— 圆角条 */
+    .top-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      background: #ffffffdd;
+      backdrop-filter: blur(6px);
+      padding: 0.5rem 1.2rem;
+      border-radius: 60px;
+      box-shadow: 0 4px 12px rgba(170, 110, 60, 0.12);
+      margin-bottom: 2.5rem;
+    }
+
+    .nav-brand {
+      font-weight: 500;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      color: #7c5a3e;
+      background: #f1ded0;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+    }
+
+    .nav-list {
+      display: flex;
+      gap: 1.2rem;
+      list-style: none;
+      font-size: 0.95rem;
+    }
+
+    .nav-list li a {
+      text-decoration: none;
+      color: #4b372b;
+      padding: 0.25rem 0.6rem;
+      border-radius: 30px;
+      transition: background 0.15s, color 0.1s;
+    }
+
+    .nav-list li a:hover {
+      background: #dfc7b4;
+      color: #2b1f17;
+    }
+
+    /* hero 区域 */
+    .hero-wrap {
+      text-align: center;
+      padding: 1.2rem 0 1.8rem;
+    }
+
+    .hero-wrap h1 {
+      font-size: 2.6rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      color: #553a28;
+      background: linear-gradient(to right, #7a5338, #a4724e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-wrap p {
+      max-width: 600px;
+      margin: 0.6rem auto 0;
+      color: #5c4433;
+      font-size: 1rem;
+    }
+
+    /* 卡片通用 */
+    .card {
+      background: #ffffffec;
+      backdrop-filter: blur(2px);
+      border-radius: 28px;
+      padding: 1.6rem 2rem;
+      box-shadow: 0 6px 18px rgba(130, 70, 30, 0.08);
+      transition: box-shadow 0.15s;
+    }
+
+    .card + .card {
+      margin-top: 1.6rem;
+    }
+
+    .card h2, .card h3 {
+      font-weight: 450;
+      font-size: 1.4rem;
+      border-left: 5px solid #dfb694;
+      padding-left: 1rem;
+      margin-bottom: 1rem;
+      color: #4f3625;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      border-left-width: 4px;
+      margin: 1.2rem 0 0.6rem;
+    }
+
+    .card p {
+      margin: 0.6rem 0;
+      color: #463529;
+    }
+
+    /* 三个场景模块 — 小卡片组 */
+    .scenes-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin: 1rem 0 0.4rem;
+    }
+
+    .scene-item {
+      background: #fbf3ea;
+      border-radius: 24px;
+      padding: 1.2rem 1.4rem;
+      flex: 1 1 200px;
+      box-shadow: 0 3px 10px rgba(140, 90, 50, 0.06);
+      transition: transform 0.1s, background 0.15s;
+    }
+
+    .scene-item:hover {
+      background: #f7e8db;
+      transform: translateY(-2px);
+    }
+
+    .scene-item .emoji-marker {
+      font-size: 1.6rem;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .scene-item h4 {
+      font-weight: 500;
+      font-size: 1.1rem;
+      color: #5d4030;
+      margin-bottom: 0.2rem;
+    }
+
+    .scene-item p {
+      font-size: 0.9rem;
+      color: #5a4436;
+    }
+
+    /* 常见说明 / FAQ 摘要 */
+    .faq-block {
+      margin-top: 1rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px dashed #dac6b6;
+      padding: 0.8rem 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 500;
+      color: #4c3524;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .faq-q span {
+      background: #d9b99e;
+      color: #2b1e14;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.7rem;
+    }
+
+    .faq-a {
+      margin: 0.3rem 0 0 1.2rem;
+      color: #4e3b2e;
+      font-size: 0.95rem;
+    }
+
+    /* 链接按钮感 */
+    a {
+      color: #7c5439;
+      text-decoration: none;
+      font-weight: 470;
+      border-bottom: 1px solid transparent;
+      transition: border 0.1s, background 0.1s;
+      border-radius: 20px;
+      padding: 0 0.2rem;
+    }
+
+    a:hover {
+      border-bottom: 1px solid #a47d62;
+      background: #f3ded0;
+    }
+
+    .btn-link {
+      display: inline-block;
+      background: #f0ded0;
+      border-radius: 60px;
+      padding: 0.3rem 1.2rem;
+      font-weight: 450;
+      border: none;
+      box-shadow: 0 2px 6px rgba(110, 60, 25, 0.08);
+      transition: background 0.1s, box-shadow 0.1s;
+      color: #3f2d21;
+    }
+
+    .btn-link:hover {
+      background: #e6ccb9;
+      box-shadow: 0 4px 10px rgba(110, 60, 25, 0.12);
+      border-bottom: none;
+    }
+
+    /* 响应式 */
+    @media (max-width: 680px) {
+      .page {
+        padding: 1rem 1rem 1.8rem;
+      }
+
+      .top-nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.6rem;
+        padding: 0.7rem 1rem;
+        border-radius: 40px;
+      }
+
+      .nav-list {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+
+      .hero-wrap h1 {
+        font-size: 2rem;
+      }
+
+      .scenes-grid {
+        flex-direction: column;
+      }
+
+      .card {
+        padding: 1.2rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 440px) {
+      body {
+        padding: 0.6rem;
+      }
+
+      .hero-wrap h1 {
+        font-size: 1.8rem;
+      }
+    }
+
+    .footer-note {
+      margin-top: 2.2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #6f5541;
+      border-top: 1px solid #e7d4c2;
+      padding-top: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 顶部导航 -->
+  <nav class="top-nav">
+    <span class="nav-brand">◈ 日常对照</span>
+    <ul class="nav-list">
+      <li><a href="#intro">概览</a></li>
+      <li><a href="#scenes">场景</a></li>
+      <li><a href="#faq">说明</a></li>
+      <li><a href="https://cnhome-i-game.com.cn">爱游戏</a></li>
+    </ul>
+  </nav>
+
+  <!-- hero 简短介绍 -->
+  <div class="hero-wrap">
+    <h1>爱游戏 · 查询与对照</h1>
+    <p>一边浏览一边对照，不急于结论，先看看不同场景下怎么理解、怎么延伸。</p>
+  </div>
+
+  <!-- 核心介绍卡片 -->
+  <div class="card" id="intro">
+    <h2>从日常查询出发</h2>
+    <p>大多数时候，我们打开一个站点并不是为了马上找到唯一答案，而是想看看别人怎么描述、怎么分类、怎么对照。在 <a href="https://cnhome-i-game.com.cn">爱游戏</a> 中，内容往往围绕常见问题展开，适合先泛读再精读，避免一开始就陷入细节。</p>
+    <p>这种阅读方式像翻一本小手册：先知道大概有哪些条目，再根据兴趣点进去。往下三个模块分别对应三种典型的对照场景。</p>
+  </div>
+
+  <!-- 三个场景模块 -->
+  <div class="card" id="scenes">
+    <h3>三个常见对照场景</h3>
+    <div class="scenes-grid">
+      <div class="scene-item">
+        <span class="emoji-marker">📋</span>
+        <h4>列表快速筛选</h4>
+        <p>面对一堆条目时，先看标题和摘要，把感兴趣的标出来。比如分类、标签、简短描述都适合横向对比。</p>
+      </div>
+      <div class="scene-item">
+        <span class="emoji-marker">🔍</span>
+        <h4>细节延伸阅读</h4>
+        <p>当某个点引起注意，可以点开相关链接或说明，不急着一次弄懂，先收藏或者记录关键词，之后回看。</p>
+      </div>
+      <div class="scene-item">
+        <span class="emoji-marker">📌</span>
+        <h4>对照不同说法</h4>
+        <p>同一个问题可能有不同角度的解释，把几段说明放在一起读，往往比单独看一篇更有收获。</p>
+      </div>
+    </div>
+    <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #5f4836;">这些场景都不复杂，但适合大多数日常浏览节奏。</p>
+  </div>
+
+  <!-- 常见说明 (FAQ 摘要) -->
+  <div class="card faq-block" id="faq">
+    <h3>常见说明摘要</h3>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q1</span> 这个页面主要用来做什么？</div>
+      <div class="faq-a">主要是提供一种浏览和对照的起点，适合先看结构再看细节。很多内容在 <a href="https://cnhome-i-game.com.cn">爱游戏</a> 中有更完整的表述，这里只做引导性概括。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q2</span> 为什么推荐先看场景模块？</div>
+      <div class="faq-a">因为不同人打开站点的习惯不一样，有人喜欢直接搜索，有人喜欢逐条浏览。三个场景基本覆盖了大部分日常使用方式，可以挑一个最像自己的开始。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q3</span> 我可以直接跳到感兴趣的部分吗？</div>
+      <div class="faq-a">当然可以。顶部导航就是为此准备的，点击「爱游戏」链接可以进入主站，也可以在页面内使用导航快速定位。</div>
+    </div>
+    <div style="margin-top: 0.8rem; padding: 0.3rem 0;">
+      <a href="https://cnhome-i-game.com.cn" class="btn-link">爱游戏</a>
+    </div>
+    <p style="margin-top: 0.8rem; font-size: 0.9rem;">以上说明基于日常使用习惯整理，不构成任何操作指引，仅作为延伸参考。</p>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="footer-note">
+    页面内容仅供对照阅读 · 保持自然节奏<br>
+    <span style="opacity: 0.6;">2025 · 爱游戏 日常查询版</span>
+  </div>
+
+</div>
+</body>
+</html>

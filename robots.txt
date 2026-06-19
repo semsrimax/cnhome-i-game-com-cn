@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://semsrimax.github.io/cnhome-i-game-com-cn/sitemap.xml
