@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA直播指南 · 知识库入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fce6b4 0%, #f8d49a 40%, #f1c27d 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-wrap {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* 主卡片容器 */
+        .main-card {
+            background: #ffffff;
+            border-radius: 40px 40px 32px 32px;
+            box-shadow: 0 18px 36px -10px rgba(160, 100, 30, 0.25), 0 8px 20px rgba(0,0,0,0.03);
+            padding: 2.8rem 2.4rem;
+            transition: all 0.15s ease;
+        }
+
+        /* 标题区 */
+        .hero-title {
+            font-size: 2.4rem;
+            font-weight: 620;
+            letter-spacing: -0.02em;
+            color: #4d2b0e;
+            background: linear-gradient(135deg, #a8622a, #c47a3a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
+            border-left: 6px solid #e5984a;
+            padding-left: 1.2rem;
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: #6b4c2a;
+            margin-bottom: 2.6rem;
+            padding-left: 1.9rem;
+            border-bottom: 1px dashed #e9d5b5;
+            padding-bottom: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.8rem;
+        }
+
+        .hero-sub span {
+            background: #f8ede0;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #6f4e26;
+        }
+
+        /* 目录感网格布局 —— 知识卡片片区 */
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 2.2rem 0 2.8rem 0;
+        }
+
+        .kb-card {
+            background: #fcf7f0;
+            border-radius: 28px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: inset 0 1px 3px rgba(255, 235, 200, 0.7), 0 4px 10px rgba(150, 90, 20, 0.04);
+            border: 1px solid #f7e8d4;
+            transition: all 0.2s ease;
+        }
+
+        .kb-card:hover {
+            background: #fffcf6;
+            border-color: #eacaa6;
+            box-shadow: 0 8px 18px -6px #c9955a33;
+            transform: translateY(-3px);
+        }
+
+        .kb-card h3 {
+            font-size: 1.4rem;
+            font-weight: 560;
+            color: #5d3717;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            letter-spacing: -0.3px;
+        }
+
+        .kb-card h3::before {
+            content: "🏀";
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .kb-card p {
+            color: #4c351f;
+            line-height: 1.6;
+            font-size: 0.96rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .kb-card .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .kb-card .tag {
+            background: #ebdccb;
+            color: #4a311b;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.78rem;
+            font-weight: 470;
+        }
+
+        /* 说明区 + 提示区 双栏 */
+        .info-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin: 1.2rem 0 2.4rem 0;
+        }
+
+        .info-box {
+            background: #faf4e9;
+            border-radius: 32px;
+            padding: 1.8rem 1.8rem 2rem 1.8rem;
+            border: 1px solid #f0deca;
+        }
+
+        .info-box h4 {
+            font-size: 1.2rem;
+            font-weight: 570;
+            color: #5b3719;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-box h4 i {
+            font-style: normal;
+            background: #e5cbb0;
+            border-radius: 40px;
+            padding: 0 0.7rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #432c17;
+            margin-left: 0.3rem;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-box li {
+            padding: 0.5rem 0 0.5rem 0.8rem;
+            border-bottom: 1px solid #e6d5be;
+            font-size: 0.95rem;
+            color: #3f2c18;
+            position: relative;
+        }
+
+        .info-box li::before {
+            content: "•";
+            color: #b57d42;
+            font-weight: bold;
+            position: absolute;
+            left: -2px;
+        }
+
+        .info-box li:last-child {
+            border-bottom: none;
+        }
+
+        .highlight-link-sentence {
+            background: #fff7ea;
+            border-radius: 60px;
+            padding: 0.8rem 1.6rem;
+            margin: 1.2rem 0 0.6rem 0;
+            font-size: 1rem;
+            border: 1px solid #e6cfb0;
+            color: #2f200f;
+            line-height: 1.7;
+        }
+
+        .highlight-link-sentence a {
+            color: #b45f1b;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.1rem 0.5rem;
+            border-radius: 40px;
+            background: #f6e3cd;
+            transition: all 0.15s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .highlight-link-sentence a:hover {
+            background: #e3c6a4;
+            border-bottom-color: #ab601e;
+            color: #3d250b;
+        }
+
+        .faq-mini {
+            margin: 2.2rem 0 1rem 0;
+            padding: 1.2rem 1.8rem;
+            background: #fffbf3;
+            border-radius: 36px;
+            border: 1px solid #eddccb;
+        }
+
+        .faq-mini details {
+            margin: 0.5rem 0;
+            border-bottom: 1px dashed #e0ccb4;
+            padding: 0.5rem 0;
+        }
+
+        .faq-mini details:last-child {
+            border-bottom: none;
+        }
+
+        .faq-mini summary {
+            font-weight: 540;
+            color: #4d2e12;
+            cursor: pointer;
+            padding: 0.4rem 0;
+            font-size: 0.98rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-mini summary::before {
+            content: "▸";
+            margin-right: 0.7rem;
+            color: #b77d42;
+            font-size: 1.2rem;
+        }
+
+        .faq-mini details[open] summary::before {
+            content: "▾";
+        }
+
+        .faq-mini .answer {
+            margin: 0.5rem 0 0.3rem 1.6rem;
+            color: #4c3821;
+            font-size: 0.94rem;
+            line-height: 1.6;
+        }
+
+        .footer-note {
+            margin-top: 2.8rem;
+            text-align: center;
+            color: #644b2b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e9d5b5;
+            padding-top: 1.5rem;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-note a {
+            color: #945f27;
+            text-decoration: underline wavy #dbb78b 1px;
+            text-underline-offset: 4px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 700px) {
+            .main-card {
+                padding: 1.8rem 1rem;
+                border-radius: 32px;
+            }
+            .hero-title {
+                font-size: 2rem;
+                padding-left: 1rem;
+            }
+            .hero-sub {
+                padding-left: 1rem;
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+            .info-panel {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .knowledge-grid {
+                gap: 1.2rem;
+            }
+            .kb-card {
+                padding: 1.4rem;
+            }
+            .faq-mini {
+                padding: 1rem;
+            }
+            .highlight-link-sentence {
+                padding: 0.8rem 1rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            body {
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+    <div class="main-card">
+
+        <!-- hero / 目录感标题 -->
+        <div class="hero-title">🏀 赛事知识库 · 从观赛到理解</div>
+        <div class="hero-sub">
+            <span>📺 直播场景</span>
+            <span>📊 数据解读</span>
+            <span>🏆 赛季脉络</span>
+            <span>🧠 观赛 tips</span>
+        </div>
+
+        <!-- 知识卡片网格 —— 目录感布局 -->
+        <div class="knowledge-grid">
+            <div class="kb-card">
+                <h3>直播观赛基础</h3>
+                <p>了解常规赛、季后赛、附加赛的时间分布，以及东西部对阵规则。清晰的分组和赛程能帮你更快融入每个比赛日的节奏。</p>
+                <div class="tag-list">
+                    <span class="tag">赛制</span>
+                    <span class="tag">时区换算</span>
+                    <span class="tag">转播信号</span>
+                </div>
+            </div>
+            <div class="kb-card">
+                <h3>球队· 看点</h3>
+                <p>每支球队的建队风格、核心阵容、战术偏好都不相同。了解这些背景能让每一场常规赛都更有故事感，而不只是看比分。</p>
+                <div class="tag-list">
+                    <span class="tag">分区 rivalry</span>
+                    <span class="tag">交易动态</span>
+                    <span class="tag">青年军</span>
+                </div>
+            </div>
+            <div class="kb-card">
+                <h3>数据与趋势</h3>
+                <p>从场均得分、效率值到进阶数据，数字背后反映的是比赛逻辑。慢慢熟悉这些指标，你会发现看球的角度更立体。</p>
+                <div class="tag-list">
+                    <span class="tag">PER</span>
+                    <span class="tag">三分占比</span>
+                    <span class="tag">节奏</span>
+                </div>
+            </div>
+            <div class="kb-card">
+                <h3>球迷文化</h3>
+                <p>经典解说、场边花絮、球迷社区讨论，这些都是观赛体验的一部分。篮球不只是运动，也是一种共同语言。</p>
+                <div class="tag-list">
+                    <span class="tag">周边</span>
+                    <span class="tag">经典时刻</span>
+                    <span class="tag">社区聊球</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 双栏：说明区 + 提示区 -->
+        <div class="info-panel">
+            <div class="info-box">
+                <h4>📋 说明 <i>about</i></h4>
+                <ul>
+                    <li>本页面向对 NBA 直播感兴趣的朋友，提供基础的知识索引，不替代任何官方渠道。</li>
+                    <li>所有赛程、球队信息请以最新公布为准，直播源请通过正规平台获取。</li>
+                    <li>内容偏向入门与日常观赛辅助，适合新老球迷随手翻阅。</li>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h4>💡 提示 <i>tips</i></h4>
+                <ul>
+                    <li>提前关注球队官方社媒，获取伤病名单和首发预测。</li>
+                    <li>早晨场次建议留意前一天背靠背情况，轮休可能影响精彩程度。</li>
+                    <li>如果刚接触，不妨先从一支风格鲜明的球队开始跟起。</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 自然嵌入链接的句子 -->
+        <div class="highlight-link-sentence">
+            🏀 如果你正在寻找稳定的直播渠道，可以试试 <a href="https://qq-tv8.com">NBA直播</a>，页面内整合了多个信号源，适合日常快速进入观赛状态。
+        </div>
+
+        <!-- FAQ 摘要 / 相关信息区 -->
+        <div class="faq-mini">
+            <details>
+                <summary>什么是“知识库入口”风格？</summary>
+                <div class="answer">就是把分散的观赛常识、赛制说明、小技巧整理成卡片或目录样式，方便你按需查阅，而不是一次性灌输。适合慢慢积累对赛事的感觉。</div>
+            </details>
+            <details>
+                <summary>比赛日一般怎么安排时间？</summary>
+                <div class="answer">常规赛通常从北京时间早上 8:00 左右开始，一直到中午。周末偶尔有下午场。季后赛时间会更集中，建议提前查看周赛程。</div>
+            </details>
+            <details>
+                <summary>直播画质和延迟怎么选？</summary>
+                <div class="answer">不同平台差异较大。一般来说，稳定 1080p 需要较好带宽；如果更在意实时性（比如不看剧透），可以降低一点画质优先保证低延迟。</div>
+            </details>
+            <details>
+                <summary>相关信息去哪里了解？</summary>
+                <div class="answer">联盟官网、球队中文社媒、以及一些篮球论坛都是不错的补充。也可以留意 <a href="https://qq-tv8.com" style="color:#935c1e;text-decoration:underline;">NBA直播</a> 页面里的频道介绍，有时会附带实时数据面板。</div>
+            </details>
+        </div>
+
+        <!-- 底部 -->
+        <div class="footer-note">
+            ⏺ 日常观赛知识索引 · 保持好奇，享受比赛  ·  <a href="https://qq-tv8.com">NBA直播</a>
+        </div>
+
+    </div> <!-- main-card -->
+</div> <!-- page-wrap -->
+</body>
+</html>
