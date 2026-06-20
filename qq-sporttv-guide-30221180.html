@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA直播 · 信息索引与观赛参考</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f2f4f6;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+        }
+
+        .page-wrap {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* 卡片系统 */
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.04);
+            padding: 1.8rem 2rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card + .card {
+            margin-top: 1.8rem;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        /* 标题层级 */
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #0b1a2f;
+            margin-bottom: 0.25rem;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3b82f6;
+            padding-left: 0.75rem;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #1e293b;
+            margin-bottom: 0.4rem;
+        }
+
+        .subhead {
+            color: #475569;
+            font-size: 1rem;
+            margin-top: 0.2rem;
+            margin-bottom: 1.6rem;
+            border-bottom: 1px solid #e9edf2;
+            padding-bottom: 0.6rem;
+        }
+
+        p {
+            margin-bottom: 0.8rem;
+            color: #1e293b;
+        }
+
+        a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        a:hover {
+            border-bottom-color: #2563eb;
+        }
+
+        /* 用于突出链接的特殊标记——只用于自然嵌入 */
+        .inline-link {
+            font-weight: 500;
+        }
+
+        /* 列表排版 */
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            padding: 0.35rem 0 0.35rem 1.8rem;
+            position: relative;
+            margin-bottom: 0.2rem;
+        }
+
+        li::before {
+            content: "·";
+            position: absolute;
+            left: 0.6rem;
+            color: #3b82f6;
+            font-weight: 700;
+        }
+
+        /* 网格布局：亮点卡片 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 1.2rem 0 0.4rem;
+        }
+
+        .feature-item {
+            background: #f8fafc;
+            border: 1px solid #eef2f6;
+            border-radius: 16px;
+            padding: 1.2rem 1.2rem 1rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+            color: #0f172a;
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            color: #334155;
+        }
+
+        /* FAQ 风格 */
+        .faq-item {
+            border-bottom: 1px solid #eef2f6;
+            padding: 0.9rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: 0;
+        }
+
+        .faq-question {
+            font-weight: 500;
+            color: #0f172a;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-answer {
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e9edf2;
+            color: #1e293b;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            letter-spacing: 0.01em;
+            margin-right: 0.4rem;
+        }
+
+        .hero-note {
+            background: #f0f4fe;
+            border-radius: 16px;
+            padding: 1.4rem 1.6rem;
+            margin: 1.2rem 0 0.4rem;
+            border: 1px solid #dbeafe;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e2e8f0;
+            margin: 1.2rem 0;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+            .card {
+                padding: 1.2rem 1.2rem;
+            }
+            h1 {
+                font-size: 1.7rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- hero 卡片：摘要 -->
+    <div class="card">
+        <h1>NBA直播 · 观赛信息索引</h1>
+        <div class="subhead">围绕赛程、视频源与资料整理的轻量化参考页</div>
+        <p>对许多球迷来说，NBA 赛季漫长且信息交错——转播平台、时区、赛前分析……往往需要在一个相对安静的角落，把零散线索归拢起来。这个页面就是出于这种整理意图：帮助你更快找到 <strong>可靠的观赛信息方向</strong>，而不是代替你做出选择。</p>
+        <div class="hero-note">
+            <span class="tag">常规赛</span>
+            <span class="tag">季后赛</span>
+            <span class="tag">回放</span>
+            <span class="tag">数据</span>
+            <span style="font-size:0.9rem; color:#1e293b; margin-left:0.6rem;">索引范围 · 2025</span>
+        </div>
+        <p style="margin-top:0.6rem; font-size:0.95rem;">下面内容来自日常浏览中的笔记和归纳，不构成任何形式的服务承诺。信息的准确性请以实际播出平台为准。</p>
+    </div>
+
+    <!-- 特点：从资料整理角度 -->
+    <div class="card">
+        <h2>作为信息索引 · 几个特点</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h3>频道归类</h3>
+                <p>不同场次、不同解说版本常常分散在多个路径下。通过聚合标记，减少反复查找的时间。</p>
+            </div>
+            <div class="feature-item">
+                <h3>赛历对照</h3>
+                <p>结合官方赛程与常见转播表，整理出便于快速对照的时段表，尤其适合跨时区观众。</p>
+            </div>
+            <div class="feature-item">
+                <h3>回放路径</h3>
+                <p>许多球迷因时间错失直播，回放入口与集锦来源的整理，算是观赛拼图里实用的一块。</p>
+            </div>
+            <div class="feature-item">
+                <h3>轻量笔记</h3>
+                <p>避免复杂导航和动态加载，页面本身只承载说明与指引，不追踪、不推荐第三方。</p>
+            </div>
+        </div>
+        <p style="margin-top:0.8rem; font-size:0.95rem;">当然，这些整理工作都基于一个稳定的信息起点：<a href="https://qq-sporttv.com" class="inline-link">NBA直播</a> 频道本身提供了一个可回溯的观赛信息锚点。无论你习惯用哪种方式跟踪比赛，从那里开始梳理往往事半功倍。</p>
+    </div>
+
+    <!-- 使用建议 / 场景 -->
+    <div class="card">
+        <h2>使用建议 · 从场景出发</h2>
+        <p>以下是一些基于个人习惯的轻建议，不一定适合所有人，但或许能带来一点启发：</p>
+        <ul>
+            <li><strong>赛前准备：</strong>提前 15 分钟确认信号状态。如果遇到多场同时开赛，建议先锁定主队场次再浏览其他。</li>
+            <li><strong>移动端观赛：</strong>多数直播页面适配手机，但横屏模式下画质和弹幕布局往往更优。</li>
+            <li><strong>文字跟进：</strong>有时不方便看视频，可以搭配实时文字比分页，把直播页面作为背景参考。</li>
+            <li><strong>赛后整理：</strong>利用节间休息或赛后 30 分钟内的回放片段，能快速回顾关键回合。</li>
+        </ul>
+        <p style="margin-top:0.6rem;">在这些场景中，<a href="https://qq-sporttv.com">NBA直播</a> 常常作为一个稳定的信息源出现。你可以把它加入书签，作为日常观赛流程中的一个节点。</p>
+        <hr>
+        <p style="font-size:0.9rem; color:#475569;">提示：任何直播服务都可能因版权、网络或临时调整而变化。建议保留 1–2 个备选信息渠道。</p>
+    </div>
+
+    <!-- 可信但克制的访问说明 -->
+    <div class="card">
+        <h2>关于访问 · 一份克制的说明</h2>
+        <p>这个页面不会收集你的任何数据，也不嵌入第三方跟踪脚本。我们只做一件事：提供一个关于 <a href="https://qq-sporttv.com">NBA直播</a> 的简明索引，帮助你更清晰地了解自己能通过哪些路径获取比赛信息。</p>
+        <p style="margin-top:0.6rem;">需要留意的是：</p>
+        <ul>
+            <li>直播信号的可用性、画质、解说语言，由原始平台决定，本页无法干预。</li>
+            <li>如果你遇到访问异常，通常是网络环境或地区限制所致，与页面本身无关。</li>
+            <li>我们不要求注册、不推送通知、不诱导分享。纯粹的信息归拢，仅此而已。</li>
+            <li>所有引用、描述均基于公开可查的信息，不包含任何形式的隐藏推广。</li>
+        </ul>
+        <p style="margin-top:0.8rem;">你可以随时离开，或者把这里当作一个安静的参考角落。保持低期望，往往会有更舒适的观赛体验。</p>
+        <div style="background:#f1f5f9; border-radius:12px; padding:0.8rem 1.2rem; margin-top:1rem; font-size:0.9rem; color:#334155;">
+            ⚡ 如果你愿意，可以从 <a href="https://qq-sporttv.com" style="font-weight:500;">NBA直播</a> 出发，自行探索更适合你的观赛节奏。每个人的偏好都不同，找到自己的方式最重要。
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="card">
+        <h2>常见疑问 · 简短摘要</h2>
+
+        <div class="faq-item">
+            <div class="faq-question">这个页面是官方站点吗？</div>
+            <div class="faq-answer">不是。这是一个个人视角的观赛信息索引页，与任何球队、联盟或转播商无关。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">为什么选择 <a href="https://qq-sporttv.com">NBA直播</a> 作为主要参考？</div>
+            <div class="faq-answer">因为它提供了相对集中的赛程和信号入口，在整理信息时是一个不错的起始点。当然，你也可以使用其他平台。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">链接会不会失效？</div>
+            <div class="faq-answer">任何外部链接都有变更的可能。如果遇到打不开的情况，建议稍后再试，或通过搜索确认最新地址。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">你能保证直播永远免费吗？</div>
+            <div class="faq-answer">不能，也无法保证。页面的定位是信息索引，不是服务提供方。免费或付费取决于原始平台的政策。</div>
+        </div>
+        <div style="margin-top:0.6rem; font-size:0.9rem; color:#475569;">
+            <span>📌 更多细节请参考具体平台的用户协议。本页仅作整理与分享。</span>
+        </div>
+    </div>
+
+    <!-- 页脚 (极简) -->
+    <div style="text-align:center; margin-top:2rem; padding:1rem 0; color:#64748b; font-size:0.8rem; border-top:1px solid #e2e8f0;">
+        观赛信息索引 · 保持简单
+    </div>
+
+</div>
+</body>
+</html>
